@@ -4,13 +4,15 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Button } from './components/ui/button'
 
+import Hero from './components/custom/Hero'
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <>
-      <h2> Welcome to the website of code Conqueres</h2>
-      <Button> hi </Button>
+      {/* landing page  */}
+      <Hero/>
     </>
   )
 }
