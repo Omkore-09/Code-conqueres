@@ -1,0 +1,41 @@
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+  
+  const apiKey = import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY;
+  const genAI = new GoogleGenerativeAI(apiKey);
+  
+  const model = genAI.getGenerativeModel({
+    model: "gemini-1.5-flash",
+  });
+  
+  const generationConfig = {
+    temperature: 1,
+    topP: 0.95,
+    topK: 64,
+    maxOutputTokens: 8192,
+    responseMimeType: "application/json",
+  };
+  
+ 
+     export const chatSession = model.startChat({
+      generationConfig,
+ 
+      history: [
+        {
+          role: "user",
+          parts: [
+            {text: "Generate Travel Plan for Location: Las Vegas, for 3 Days for Couple with a Cheap budget, Give me a Hotels options list with HotelName, Hotel address, Price, hotel image url, geo coordinates, rating, descriptions and suggest itinerary with placeName, Place Details, Place Image Url, Geo Coordinates, ticket Pricing, rating, Time travel each of the location for 3 days with each day plan with best time to visit in JSON format.\n"},
+          ],
+        },
+        {
+          role: "model",
+          parts: [
+            {text: "```json\n{\n  \"hotels\": [\n    {\n      \"name\": \"The D Las Vegas\",\n      \"address\": \"301 Fremont Street, Las Vegas, NV 89101\",\n      \"price\": \"$50-$100 per night\",\n      \"image_url\": \"https://www.thelinq.com/media/images/linq-hotel-exterior-shot-desktop.jpg\",\n      \"geo_coordinates\": \"36.1699, -115.1423\",\n      \"rating\": 4.0,\n      \"description\": \"A budget-friendly hotel located in the heart of Fremont Street, known for its lively atmosphere and proximity to casinos and entertainment.\"\n    },\n    {\n      \"name\": \"Circus Circus Hotel & Casino\",\n      \"address\": \"2880 S Las Vegas Blvd, Las Vegas, NV 89109\",\n      \"price\": \"$40-$80 per night\",\n      \"image_url\": \"https://www.circuscircus.com/media/images/circus-circus-hotel-exterior.jpg\",\n      \"geo_coordinates\": \"36.1083, -115.1729\",\n      \"rating\": 3.5,\n      \"description\": \"A classic Las Vegas hotel with a circus theme, offering affordable rooms, a large casino, and family-friendly attractions.\"\n    },\n    {\n      \"name\": \"Golden Nugget Hotel & Casino\",\n      \"address\": \"129 E Fremont St, Las Vegas, NV 89101\",\n      \"price\": \"$60-$120 per night\",\n      \"image_url\": \"https://www.goldennugget.com/media/images/golden-nugget-hotel-exterior.jpg\",\n      \"geo_coordinates\": \"36.1697, -115.1407\",\n      \"rating\": 4.5,\n      \"description\": \"A historic hotel with a luxurious feel, featuring a world-class casino, a shark tank, and a variety of dining options.\"\n    },\n    {\n      \"name\": \"The Strat Hotel, Casino & SkyPod\",\n      \"address\": \"2000 S Las Vegas Blvd, Las Vegas, NV 89104\",\n      \"price\": \"$50-$100 per night\",\n      \"image_url\": \"https://www.thestrat.com/media/images/strat-hotel-exterior.jpg\",\n      \"geo_coordinates\": \"36.1177, -115.1721\",\n      \"rating\": 4.0,\n      \"description\": \"A towering hotel offering affordable rooms, a casino, dining options, and an observation deck with panoramic city views.\"\n    }\n  ],\n  \"itinerary\": {\n    \"day1\": {\n      \"time\": \"Morning (9:00 AM - 12:00 PM)\",\n      \"place\": \"Fremont Street Experience\",\n      \"details\": \"A vibrant pedestrian mall with a canopy of lights, street performers, and live music.\",\n      \"image_url\": \"https://www.vegasexperience.com/media/images/freemont-street-experience.jpg\",\n      \"geo_coordinates\": \"36.1699, -115.1423\",\n      \"ticket_pricing\": \"Free\",\n      \"rating\": 4.5\n    },\n    \"day1\": {\n      \"time\": \"Afternoon (1:00 PM - 4:00 PM)\",\n      \"place\": \"Neon Museum\",\n      \"details\": \"A museum showcasing vintage Las Vegas neon signs, offering a glimpse into the city's history.\",\n      \"image_url\": \"https://www.neonmuseum.org/media/images/neon-museum-exterior.jpg\",\n      \"geo_coordinates\": \"36.1682, -115.1548\",\n      \"ticket_pricing\": \"$20-$30 per person\",\n      \"rating\": 4.0\n    },\n    \"day1\": {\n      \"time\": \"Evening (6:00 PM - 9:00 PM)\",\n      \"place\": \"The LINQ Promenade\",\n      \"details\": \"A lively outdoor shopping and dining complex featuring the High Roller observation wheel.\",\n      \"image_url\": \"https://www.thelinq.com/media/images/linq-promenade-exterior.jpg\",\n      \"geo_coordinates\": \"36.1143, -115.1730\",\n      \"ticket_pricing\": \"Free to walk around, $30-$40 for High Roller ride\",\n      \"rating\": 4.0\n    },\n    \"day2\": {\n      \"time\": \"Morning (10:00 AM - 1:00 PM)\",\n      \"place\": \"Bellagio Conservatory & Botanical Garden\",\n      \"details\": \"A stunning display of floral artistry and botanical wonders, changing seasonally.\",\n      \"image_url\": \"https://www.bellagio.com/media/images/conservatory-botanical-garden.jpg\",\n      \"geo_coordinates\": \"36.1181, -115.1732\",\n      \"ticket_pricing\": \"Free\",\n      \"rating\": 4.5\n    },\n    \"day2\": {\n      \"time\": \"Afternoon (2:00 PM - 5:00 PM)\",\n      \"place\": \"The Venetian & The Palazzo\",\n      \"details\": \"A luxurious resort complex with a replica of Venice, including canals and gondolas.\",\n      \"image_url\": \"https://www.venetian.com/media/images/venetian-palazzo-exterior.jpg\",\n      \"geo_coordinates\": \"36.1150, -115.1740\",\n      \"ticket_pricing\": \"Free to walk around, gondola ride $30-$40 per person\",\n      \"rating\": 4.0\n    },\n    \"day2\": {\n      \"time\": \"Evening (7:00 PM - 10:00 PM)\",\n      \"place\": \"Caesars Palace\",\n      \"details\": \"A classic Las Vegas resort with a Roman theme, featuring a casino, dining options, and entertainment.\",\n      \"image_url\": \"https://www.caesars.com/media/images/caesars-palace-exterior.jpg\",\n      \"geo_coordinates\": \"36.1130, -115.1724\",\n      \"ticket_pricing\": \"Free to walk around, shows and attractions vary in price\",\n      \"rating\": 4.0\n    },\n    \"day3\": {\n      \"time\": \"Morning (9:00 AM - 12:00 PM)\",\n      \"place\": \"Red Rock Canyon National Conservation Area\",\n      \"details\": \"A scenic desert landscape with hiking trails, rock formations, and breathtaking views.\",\n      \"image_url\": \"https://www.nps.gov/redr/planyourvisit/images/redrockcanyon2.jpg\",\n      \"geo_coordinates\": \"36.2188, -115.3782\",\n      \"ticket_pricing\": \"$15 per vehicle\",\n      \"rating\": 4.5\n    },\n    \"day3\": {\n      \"time\": \"Afternoon (1:00 PM - 4:00 PM)\",\n      \"place\": \"Hoover Dam\",\n      \"details\": \"A historic dam and engineering marvel, offering tours and stunning views of the Colorado River.\",\n      \"image_url\": \"https://www.usbr.gov/lc/hooverdam/images/hoover_dam_1.jpg\",\n      \"geo_coordinates\": \"36.0066, -114.7414\",\n      \"ticket_pricing\": \"Free to view from the dam, $30-$40 for tours\",\n      \"rating\": 4.5\n    },\n    \"day3\": {\n      \"time\": \"Evening (6:00 PM - 9:00 PM)\",\n      \"place\": \"The Strip\",\n      \"details\": \"The iconic heart of Las Vegas, with its bustling casinos, hotels, and entertainment venues.\",\n      \"image_url\": \"https://www.visitlasvegas.com/media/images/las-vegas-strip.jpg\",\n      \"geo_coordinates\": \"36.1149, -115.1732\",\n      \"ticket_pricing\": \"Free to walk around, shows and attractions vary in price\",\n      \"rating\": 4.5\n    }\n  }\n}\n```\n\n**Notes:**\n\n* This itinerary is a suggestion and can be customized based on your interests and preferences.\n* Hotel prices are approximate and can vary based on season and availability.\n* Ticket prices are subject to change.\n* It's recommended to book tours and attractions in advance, especially during peak season.\n* Consider using public transportation or ride-sharing services to save on parking costs.\n* Take advantage of free activities, such as walking around The Strip, exploring casinos, and enjoying free shows.\n* Drink plenty of water and wear comfortable shoes, as you will be doing a lot of walking.\n* Be aware of your surroundings and practice safe travel habits.\n\nEnjoy your trip to Las Vegas!\n"},
+          ],
+        },
+      ],
+    });
+  
+
+  
+  
