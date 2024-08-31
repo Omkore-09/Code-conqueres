@@ -57,7 +57,7 @@ To run the app in development mode:
       ```bash
       npm run dev
 
-Open your browser and go to http://localhost:3000 to view the app.
+Open your browser and go to http://localhost:5173 to view the app.
 
 ## Technologies Used
 
