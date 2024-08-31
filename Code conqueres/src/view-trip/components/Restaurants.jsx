@@ -5,8 +5,8 @@ const Restaurants = ({trip}) => {
   return (
     <div className='mt-16'>
       <div>
-      <h2 className='font-bold text-xl mt-5'> Restaurant Recomondation</h2>
-      <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4'>
+      <h2 className='font-bold text-3xl mt-5'> Restaurant Recomondation 🍛</h2>
+      <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-10'>
         {trip?.tripData?.restaurants?.map((restaurants , idx)=>(
             <Link to={'https://www.google.com/maps/search/?api=1&query='+restaurants?.name+" ,"+ restaurants?.location} target='_blank' >
             <div className='hover:scale-105 transition-all cursor-pointer'> 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const PlacesToVisit = ({ trip }) => {
   const itinerary = trip.tripData?.itinerary || {};
@@ -7,13 +8,14 @@ const PlacesToVisit = ({ trip }) => {
 
   return (
     <div className='mt-16'>
-      <h2 className="font-bold text-lg mb-4">Places to Visit</h2>
+      <h2 className="font-bold text-3xl mb-4">Places to Visit 🌅</h2>
 
       {/* Grid Layout for Itinerary Days */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
         {itineraryDays.map((day, idx) => {
           const dayDetails = itinerary[day];
           return (
+            <Link to={'https://www.google.com/maps/search/?api=1&query='+dayDetails.place} target='_blank' >
             <div key={idx} className="border rounded-lg p-4 shadow-md">
               <h2 className="font-medium text-lg mb-2">{day.charAt(0).toUpperCase() + day.slice(1)}</h2>
               <img
@@ -27,6 +29,7 @@ const PlacesToVisit = ({ trip }) => {
               <p className="mt-1">Rating: {dayDetails.rating}⭐</p>
               <p className="mt-1">Ticket Pricing: {dayDetails.ticket_pricing}</p>
             </div>
+            </Link>
           );
         })}
       </div>

@@ -10,6 +10,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 import ViewTrip from './view-trip/[tripId]/index.jsx'
 import Partition from './components/custom/Partition.jsx'
 import Modal from './components/custom/Model.jsx'
+import WeatherPrediction from './service/WeatherPrediction.jsx'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: '/modal',
     element: <Modal />,
+  },
+  {
+    path: '/weatherPred',
+    element: <WeatherPrediction />,
   },
 ])
 

@@ -76,7 +76,7 @@ const Partition = () => {
           </p>
 
           <Link to={'/create-trip'}>
-        <Button className='animate-fade-up delay-200 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700'> Try AI trip builder</Button>
+        <Button className='animate-fade-up delay-200 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700'> Try AI trip builder✨</Button>
       </Link>
           
         </div>
@@ -98,7 +98,7 @@ const Partition = () => {
             onClick={toggleSidebar}
             className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
           >
-            Do it yourself
+            Do it yourself 🖆
           </button>
           
         

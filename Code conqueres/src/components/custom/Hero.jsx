@@ -18,12 +18,15 @@ function Hero() {
       </p>
 
       {/* Button with Animation */}
-      <Link to={'/partition'}>
+      {/* <Link to={'/partition'}>
         <Button className='animate-fade-up delay-200'>Get Started, For Free</Button>
-      </Link>
+      </Link> */}
       {/* <Link to={'/create-trip'}>
         <Button className='animate-fade-up delay-200'>Get Started, For Free</Button>
       </Link> */}
+      <Link to={'/weatherPred'}>
+        <Button className='animate-fade-up delay-200'>Get Started, For Free</Button>
+      </Link>
 
       <div>
       <img 
