@@ -24,6 +24,7 @@ import axios from "axios";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from '@/service/firebaseConfig.jsx';
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 function Createtrip() {
   const [place, setPlace] = useState();
@@ -31,6 +32,7 @@ function Createtrip() {
   const [formData, setFormData] = useState([]);
   const [openDailog, setOpenDailog] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate= useNavigate();
 
   const handlePlaceSelected = (selectedPlace) => {
     setPlace(selectedPlace);
@@ -97,6 +99,8 @@ function Createtrip() {
       id: docId
     });
     // setLoading(false);
+    
+    navigate('/view-trip/'+docId)
   }
 
   const GetUserProfile = (tokenInfo) => {
