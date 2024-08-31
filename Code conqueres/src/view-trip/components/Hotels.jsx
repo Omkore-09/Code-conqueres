@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom'
 
 const Hotels = ({trip}) => {
   return (
-    <div>
+    <div className='mt-16'>
       <h2 className='font-bold text-xl mt-5'> Hotel Reacommendation</h2>
       <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4'>
         {trip?.tripData?.hotels?.map((hotel , idx)=>(
             <Link to={'https://www.google.com/maps/search/?api=1&query='+hotel?.name+" ,"+ hotel?.address} target='_blank' >
             <div className='hover:scale-105 transition-all cursor-pointer'> 
-                <img src='/img.webp' alt="" className='rounded-xl'/>
+                <img src='/hotel.png' alt="" className='rounded-xl'/>
                 <div className='my-2 flex flex-col gap-2'>
                     <h2 className='font-medium text-center'> {hotel?.name} </h2>
                     <h2 className='text-xs text-gray-500 text-center'>📍 {hotel?.address} </h2>

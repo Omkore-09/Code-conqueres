@@ -77,6 +77,8 @@ function Createtrip() {
       .replace("{totalDays}", formData?.noOfDays)
       .replace("{travelers}", formData?.travelers)
       .replace("{budget}", formData?.budget)
+      .replace("{interests}", formData?.interests)
+      .replace("{transportation} ", formData?.transportation )
       .replace("{totalDays}", formData?.noOfDays);
 
     console.log(FINAL_PROMPT);
@@ -170,12 +172,37 @@ function Createtrip() {
             onChange={(e) => handelInputChange("noOfDays", e.target.value)}
           />
         </div>
-      </div>
+        <div>
+          <h2 className="text-xl my-3 font-medium">
+            What is your area of intrest to be visited ?
+          </h2>
+          <Input
+            placeholder={"Ex-historical places"}
+            type="text"
+            onChange={(e) => handelInputChange("interests", e.target.value)}
+          />
+        </div>
+        <div>
+          <h2 className="text-xl my-3 font-medium">
+            Mode of the tranportation :
+          </h2>
+          <Input
+            placeholder={"Ex-historical places"}
+            type="text"
+            onChange={(e) => handelInputChange("transportation", e.target.value)}
+          />
+        </div>
+      
 
       <div>
         <h2 className="text-xl my-3 font-medium">What is Your Budget?</h2>
+        <Input
+            placeholder={"Ex-10000"}
+            type="text"
+            onChange={(e) => handelInputChange("budget", e.target.value)}
+          />
 
-        <div className="grid grid-cols-3 gap-5 mt-5">
+        {/* <div className="grid grid-cols-3 gap-5 mt-5">
           {SelectBudgetOptions.map((item, index) => (
             <div
               key={index}
@@ -188,7 +215,8 @@ function Createtrip() {
               <h2 className="text-sm text-gray-500"> {item.desc} </h2>
             </div>
           ))}
-        </div>
+        </div> */}
+      </div>
       </div>
       <div>
         <h2 className="text-xl my-3 font-medium">

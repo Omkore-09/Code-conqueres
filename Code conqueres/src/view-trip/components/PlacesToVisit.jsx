@@ -6,7 +6,7 @@ const PlacesToVisit = ({ trip }) => {
   const hotels = trip.tripData?.hotels || [];
 
   return (
-    <div>
+    <div className='mt-16'>
       <h2 className="font-bold text-lg mb-4">Places to Visit</h2>
 
       {/* Grid Layout for Itinerary Days */}
@@ -17,7 +17,7 @@ const PlacesToVisit = ({ trip }) => {
             <div key={idx} className="border rounded-lg p-4 shadow-md">
               <h2 className="font-medium text-lg mb-2">{day.charAt(0).toUpperCase() + day.slice(1)}</h2>
               <img
-                src="/img.webp"
+                src="/place.jpg"
                 alt={dayDetails.place}
                 className="w-full h-40 object-cover rounded-md mb-2"
               />
