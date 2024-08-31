@@ -21,12 +21,16 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from '@/service/firebaseConfig.jsx';
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 function Createtrip() {
   const [place, setPlace] = useState();
 
   const [formData, setFormData] = useState([]);
   const [openDailog, setOpenDailog] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handlePlaceSelected = (selectedPlace) => {
     setPlace(selectedPlace);
@@ -45,9 +49,9 @@ function Createtrip() {
   }, [formData]);
 
   const login = useGoogleLogin({
-    onSuccess:(codeResp)=>GetUserProfile(codeResp),
-    onError:(error)=>console.log(error)
-  })
+    onSuccess: (codeResp) => GetUserProfile(codeResp),
+    onError: (error) => console.log(error),
+  });
 
   const OnGenerateTrip = async () => {
     const user = localStorage.getItem("user");
@@ -65,6 +69,7 @@ function Createtrip() {
       return;
     }
 
+    setLoading(true);
     // console.log(formData);
     const FINAL_PROMPT = AI_PROMPT.replace("{location}", formData?.location)
       .replace("{totalDays}", formData?.noOfDays)
@@ -77,21 +82,41 @@ function Createtrip() {
     const result = await chatSession.sendMessage(FINAL_PROMPT);
 
     console.log(result?.response?.text());
+    setLoading(false);
+    SaveAiTrip(result?.response?.text());
   };
 
-  const GetUserProfile=(tokenInfo)=>{
-    axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?acess_token=${tokenInfo?.access_token}`,{
-      headers:{
-        Authorization:`Bearer ${tokenInfo?.access_token}`,
-        Accept:'Application/json'
-      }
-    }).then((res)=>{
-      console.log(res);
-      localStorage.setItem('user',JSON.stringify(res.data));
-      setOpenDailog(false);
-      OnGenerateTrip();
-    })
+  const SaveAiTrip = async(TripData) => {
+    // setLoading(true);
+    const user = JSON.parse(localStorage.getItem('user'));
+    const docId = Date.now().toString();
+    await setDoc(doc(db, "Trips", docId), {
+      userSelection: formData,
+      tripData: JSON.parse(TripData),
+      userEmail: user?.email,
+      id: docId
+    });
+    // setLoading(false);
   }
+
+  const GetUserProfile = (tokenInfo) => {
+    axios
+      .get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?acess_token=${tokenInfo?.access_token}`,
+        {
+          headers: {
+            Authorization: `Bearer ${tokenInfo?.access_token}`,
+            Accept: "Application/json",
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem("user", JSON.stringify(res.data));
+        setOpenDailog(false);
+        OnGenerateTrip();
+      });
+  };
 
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-72 px-5 mt-10">
@@ -185,25 +210,33 @@ function Createtrip() {
         </div>
       </div>
 
-      <div className="my-20 justify-end flex">
-        <Button onClick={OnGenerateTrip}>Generate Trip</Button>
+      <div className="my-10 justify-end flex">
+        <Button 
+        disabled={loading}
+        onClick={OnGenerateTrip}>
+          {loading ? (
+            <AiOutlineLoading3Quarters className="h-7 w-7 animate-spin" />
+          ) : (
+            "Generate Trip"
+          )}
+        </Button>
       </div>
 
       <Dialog open={openDailog}>
-        
         <DialogContent>
           <DialogHeader>
-           
             <DialogDescription>
-              <img src="/logo.svg"/>
+              <img src="/logo.svg" />
               <h2 className="font-bold text-lg mt-7">Sign In With Google</h2>
               <p> Sign in to the App with Google authentication securely</p>
 
               <Button
-              onClick={login}
-               className="w-full mt-5 flex gap-4 items-center"> 
-                <FcGoogle className="h-7 w-7" /> 
-                Sign In with Google</Button>
+                onClick={login}
+                className="w-full mt-5 flex gap-4 items-center"
+              >
+                <FcGoogle className="h-7 w-7" />
+                Sign In with Google
+              </Button>
             </DialogDescription>
           </DialogHeader>
         </DialogContent>
