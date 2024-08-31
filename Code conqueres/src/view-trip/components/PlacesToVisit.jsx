@@ -17,7 +17,7 @@ const PlacesToVisit = ({ trip }) => {
             <div key={idx} className="border rounded-lg p-4 shadow-md">
               <h2 className="font-medium text-lg mb-2">{day.charAt(0).toUpperCase() + day.slice(1)}</h2>
               <img
-                src={dayDetails.image_url}
+                src="/img.webp"
                 alt={dayDetails.place}
                 className="w-full h-40 object-cover rounded-md mb-2"
               />
@@ -31,24 +31,7 @@ const PlacesToVisit = ({ trip }) => {
         })}
       </div>
 
-      {/* Hotels Section */}
-      <h2 className="font-bold text-lg mt-8 mb-4">Hotels to Stay</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {hotels.map((hotel, index) => (
-          <div key={index} className="border rounded-lg p-4 shadow-md">
-            <h3 className="font-medium text-lg mb-2">{hotel.name}</h3>
-            <img
-              src={hotel.image_url}
-              alt={hotel.name}
-              className="w-full h-40 object-cover rounded-md mb-2"
-            />
-            <p>{hotel.description}</p>
-            <p className="mt-1">Address: {hotel.address}</p>
-            <p className="mt-1">Price Range: {hotel.price}</p>
-            <p className="mt-1">Rating: {hotel.rating}⭐</p>
-          </div>
-        ))}
-      </div>
+      
     </div>
   );
 };
