@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Button } from '../ui/button';
 
@@ -26,6 +26,12 @@ const features = [
   ];
 
 const Partition = () => {
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
     
     <div className='flex flex-col'>
@@ -88,18 +94,64 @@ const Partition = () => {
           <p className="text-gray-700 mb-4 text-center">
             Browse top destinations, restaurants, and things to do and save your faves to your itinerary as you go.
           </p>
-
+          <button
+            onClick={toggleSidebar}
+            className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+          >
+            Do it yourself
+          </button>
           
-          
-          <Link to={'/modal'}>
-        <Button className='animate-fade-up delay-200 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700'> Do it yourself </Button>
-      </Link>
+        
         </div>
       </div>
     </div>
+    {isSidebarOpen && <Sidebar onClose={toggleSidebar} />}
     </div>
     
   )
 }
+
+const Sidebar = ({ onClose }) => {
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-end">
+        <div className="w-[400px] bg-white h-full p-6 shadow-lg transform transition-transform duration-300 ease-in-out">
+          <button className="text-black text-2xl font-bold" onClick={onClose}>
+            &times;
+          </button>
+          <h2 className="text-2xl font-bold mb-4">Create a Trip</h2>
+          <form>
+            <label className="block text-lg font-semibold mb-1">Trip name</label>
+            <input
+              type="text"
+              placeholder="e.g., Summer holiday in Greece"
+              maxLength={80}
+              className="w-full p-2 border rounded mb-4"
+            />
+            <label className="block text-lg font-semibold mb-1">Destination</label>
+            <input
+              type="text"
+              placeholder="Where to?"
+              className="w-full p-2 border rounded mb-4"
+            />
+            <div className="flex justify-between mt-8">
+              <button
+                type="button"
+                className="text-gray-700 underline"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
+              >
+                Create trip
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
 
 export default Partition

@@ -36,4 +36,7 @@ const PlacesToVisit = ({ trip }) => {
   );
 };
 
+
+
+
 export default PlacesToVisit;
