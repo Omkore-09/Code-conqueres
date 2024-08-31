@@ -12,7 +12,6 @@ A web-based application for planning and managing travel itineraries. This proje
 - [Installation](#installation)
 - [Running the App](#running-the-app)
 - [Technologies Used](#technologies-used)
-- [License](#license)
 
 ## Features
 
@@ -66,6 +65,3 @@ Open your browser and go to http://localhost:5173 to view the app.
 - Tailwind CSS - Utility-first CSS framework for rapid UI development
 - React Router - Declarative routing for React applications
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
