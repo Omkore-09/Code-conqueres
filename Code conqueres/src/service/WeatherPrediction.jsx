@@ -64,29 +64,29 @@ function WeatherApp() {
 
   return (
     <div className="flex flex-col items-center p-5">
-      <h1 className="text-2xl font-bold mb-4">Check weather for the planning <br /> your seamless trips</h1>
+      <h1 className="text-[3.7rem] font-bold mb-4 text-center justify-center mt-10 ">Check weather for the planning <br /> your seamless Trips</h1>
       <input
         type="text"
         placeholder="Enter location"
         value={location}
         onChange={(e) => setLocation(e.target.value)}
-        className="border p-2 rounded mb-2"
+        className="border p-3 rounded mb-2 w-[400px] border-cyan-400"
       />
       <input
         type="date"
         value={startDate}
         onChange={(e) => setStartDate(e.target.value)}
-        className="border p-2 rounded mb-2"
+        className="border p-3 rounded mb-2 w-[400px] border-cyan-400"
       />
       <input
         type="date"
         value={endDate}
         onChange={(e) => setEndDate(e.target.value)}
-        className="border p-2 rounded mb-4"
+        className="border p-3 rounded mb-2 w-[400px] border-cyan-400"
       />
       <button
         onClick={handleWeatherCheck}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-blue-500 text-white px-4 py-2 rounded mt-10"
       >
         Check Weather
       </button>
