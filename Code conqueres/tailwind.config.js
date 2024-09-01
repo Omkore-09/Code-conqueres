@@ -110,6 +110,9 @@ module.exports = {
         'slide-in-right': 'slideInRight 0.5s ease-out forwards',
         
         'scaleUp': 'scaleUp 0.3s ease-out forwards',
+        'fadeIn': 'fadeIn 1s ease-in-out',
+        'slideUp': 'slideUp 0.5s ease-out',
+        'scaleUp': 'scaleUp 0.3s ease-out'
       },
     },
   },
